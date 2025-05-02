@@ -1,0 +1,39 @@
+services:
+  mongo:
+    image: mongo:4.4
+    container_name: mongo_${COMPOSE_PROJECT_NAME}
+    restart: unless-stopped
+    ports:
+      - "${MONGO_PORT}:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - appnet
+
+  backend:
+    build: ./backend
+    container_name: backend_${COMPOSE_PROJECT_NAME}
+    restart: unless-stopped
+    ports:
+      - "${BACKEND_PORT}:4000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - appnet
+
+  frontend:
+    build: ./frontend
+    container_name: nextjs_${COMPOSE_PROJECT_NAME}
+    restart: unless-stopped
+    ports:
+      - "${NEXT_PUBLIC_PORT}:3000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - appnet
+
+networks:
+  appnet:
+
+volumes:
+  mongo_data:

@@ -18,7 +18,7 @@ This project is a clean, professional-grade template for deploying web applicati
 
 ### 1. Clone this template
 ```bash
-git clone https://your-git-url/next-template-docker.git
+git clone https://github.com/stigping/next-template-docker.git
 cd next-template-docker
 cp .env.example .env
 ```

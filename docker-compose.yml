@@ -1,6 +1,6 @@
 services:
   mongo:
-    image: mongo:4.4
+    image: mongo:4.4  # MongoDB v4.4 chosen for better CPU compatibility (no AVX requirement)
     container_name: mongo_${COMPOSE_PROJECT_NAME}
     restart: unless-stopped
     ports:
@@ -9,6 +9,11 @@ services:
       - mongo_data:/data/db
     networks:
       - appnet
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   backend:
     build: ./backend
@@ -20,6 +25,11 @@ services:
       - NODE_ENV=production
     networks:
       - appnet
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   frontend:
     build: ./frontend
@@ -31,9 +41,16 @@ services:
       - NODE_ENV=production
     networks:
       - appnet
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
+# Shared network for all services
 networks:
   appnet:
 
+# Persistent MongoDB volume
 volumes:
   mongo_data:

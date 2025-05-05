@@ -1,7 +1,38 @@
+# === Node.js ===
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# === Environment variables ===
 .env
 .env.local
+.env.*.local
+
+# === Build output ===
 .next/
-.DS_Store
-docker-data/
+dist/
+build/
+
+# === Logs ===
 logs/
+*.log
+*.log.*
+
+# === OS metadata ===
+.DS_Store
+Thumbs.db
+
+# === Docker volumes or bind mounts ===
+docker-data/
+docker-compose.override.yml
+
+# === Editor and tooling ===
+.vscode/
+*.code-workspace
+
+# === Project-specific ===
+apps.json           # created dynamically by CLI
+*.sqlite            # if you use SQLite for local dev
+webapp-cli.pub      # public key shouldn't be committed

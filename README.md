@@ -73,5 +73,6 @@ After startup, verify that services are running:
 
 ---
 
-## License
-MIT (or your choice)
+## 📄 License
+
+MIT © [stigping](https://github.com/stigping)

@@ -4,48 +4,54 @@ services:
     container_name: mongo_${COMPOSE_PROJECT_NAME}
     restart: unless-stopped
     ports:
-      - "${MONGO_PORT}:27017"
+      - "${MONGO_PORT}:27017"  # Bind dynamic host port to internal 27017
     volumes:
       - mongo_data:/data/db
+    env_file:
+      - .env
     networks:
       - appnet
     healthcheck:
       test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
       interval: 30s
       timeout: 10s
-      retries: 3
+      retries: 5  # Increased retries for robustness
 
   backend:
     build: ./backend
     container_name: backend_${COMPOSE_PROJECT_NAME}
     restart: unless-stopped
     ports:
-      - "${BACKEND_PORT}:4000"
+      - "${BACKEND_PORT}:4000"  # Dynamic host port to container port 4000
     environment:
       - NODE_ENV=production
+    env_file:
+      - .env
     networks:
       - appnet
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
       interval: 30s
       timeout: 10s
-      retries: 3
+      retries: 5  # Increased retries for robustness
 
   frontend:
     build: ./frontend
     container_name: nextjs_${COMPOSE_PROJECT_NAME}
     restart: unless-stopped
     ports:
-      - "${NEXT_PUBLIC_PORT}:3000"
+      - "${NEXT_PUBLIC_PORT}:3000"  # Dynamic host port to container port 3000
     environment:
       - NODE_ENV=production
+    env_file:
+      - .env
     networks:
       - appnet
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000"]
       interval: 30s
       timeout: 10s
-      retries: 3
+      retries: 5  # Increased retries for robustness
 
 # Shared network for all services
 networks:

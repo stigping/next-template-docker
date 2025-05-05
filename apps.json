@@ -1,0 +1,12 @@
+[
+  {
+    "name": "template",
+    "ports": {
+      "frontend": 3005,
+      "backend": 4000,
+      "mongo": 27017
+    },
+    "path": "/opt/webapps/next-template-docker",
+    "createdAt": "2025-05-03T00:00:00.000Z"
+  }
+]

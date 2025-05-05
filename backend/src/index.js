@@ -1,3 +1,11 @@
+process.on('uncaughtException', (err) => {
+  console.error('🔥 Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('🔥 Unhandled Rejection:', reason);
+});
+
 const express = require('express');
 const { connectToMongo, getDb } = require('./mongo');
 
@@ -9,11 +17,11 @@ const helmet = require('helmet');
 
 const rateLimit = require('express-rate-limit');
 
+// Apply rate limiting middleware to all requests
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per windowMs
 });
-
 app.use(apiLimiter);
 
 app.use(cors());

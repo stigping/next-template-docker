@@ -31,6 +31,7 @@ NEXT_PUBLIC_PORT=3000
 BACKEND_PORT=4000
 MONGO_PORT=27017
 MONGO_DB=yourdbname
+MONGO_HOST=mongo_your_project
 ```
 
 ### 3. Build & start
@@ -56,9 +57,19 @@ next-template-docker/
 ---
 
 ## Health Test
-Visit:
-- `http://yourdomain/api/ping`  
-  ➜ Returns JSON confirming Mongo + backend connection
+
+After startup, verify that services are running:
+
+### 🔹 If you're testing locally:
+- Frontend: `http://localhost:<NEXT_PUBLIC_PORT>`
+- Backend health: `http://localhost:<BACKEND_PORT>/health`
+- Mongo ping: `http://localhost:<BACKEND_PORT>/api/ping`
+
+### 🔹 If you're deploying with a domain (e.g. Nginx Proxy Manager or Cloudflare):
+- Frontend: `https://yourdomain.com`
+- Backend (custom route or subdomain): e.g. `https://api.yourdomain.com/health`
+
+> Be sure your `NEXT_PUBLIC_*` and `BACKEND_PORT` match the reverse proxy or server configuration.
 
 ---
 

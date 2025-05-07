@@ -3,8 +3,8 @@ services:
     image: mongo:4.4  # MongoDB v4.4 chosen for better CPU compatibility (no AVX requirement)
     container_name: mongo_${COMPOSE_PROJECT_NAME}
     restart: unless-stopped
-    ports:
-      - "${MONGO_PORT}:27017"  # Bind dynamic host port to internal 27017
+#    ports:
+#      - "${MONGO_PORT}:27017"  # Bind dynamic host port to internal 27017
     volumes:
       - mongo_data:/data/db
     env_file:
@@ -21,8 +21,8 @@ services:
     build: ./backend
     container_name: backend_${COMPOSE_PROJECT_NAME}
     restart: unless-stopped
-    ports:
-      - "${BACKEND_PORT}:4000"  # Dynamic host port to container port 4000
+#    ports:
+#      - "${BACKEND_PORT}:4000"  # Dynamic host port to container port 4000
     environment:
       - NODE_ENV=production
     env_file:
@@ -39,8 +39,8 @@ services:
     build: ./frontend
     container_name: nextjs_${COMPOSE_PROJECT_NAME}
     restart: unless-stopped
-    ports:
-      - "${NEXT_PUBLIC_PORT}:3000"  # Dynamic host port to container port 3000
+#    ports:
+#      - "${NEXT_PUBLIC_PORT}:3000"  # Dynamic host port to container port 3000
     environment:
       - NODE_ENV=production
     env_file:

@@ -1,0 +1,8 @@
+services:
+  frontend:
+    ports:
+      - "${NEXT_PUBLIC_PORT}:3000"
+
+  backend:
+    ports:
+      - "${BACKEND_PORT}:4000"

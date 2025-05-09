@@ -1,3 +1,8 @@
+![License](https://img.shields.io/github/license/stigping/next-template-docker)
+![Version](https://img.shields.io/github/v/tag/stigping/next-template-docker?label=version)
+![Last Commit](https://img.shields.io/github/last-commit/stigping/next-template-docker)
+![Issues](https://img.shields.io/github/issues/stigping/next-template-docker)
+
 # Next.js + Express + MongoDB Docker Template
 
 This project is a clean, professional-grade template for deploying web applications using:
